@@ -2,9 +2,7 @@ pipeline {
   agent any
 
   environment {
-    // Hablar con el Docker-in-Docker (DinD) que levantaste en 'dind:2375'
-    DOCKER_HOST          = 'tcp://dind:2375'
-
+    DOCKER_HOST          = 'tcp://host.docker.internal:2375'  // usa el puerto publicado del DinD
     DOCKER_HUB_REPO      = 'miguel1212/parcial2-python'
     DOCKER_IMAGE         = "${env.DOCKER_HUB_REPO}:${env.BUILD_NUMBER}"
     DOCKER_TAG_LATEST    = "${env.DOCKER_HUB_REPO}:latest"
