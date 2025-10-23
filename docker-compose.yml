@@ -1,5 +1,3 @@
-version: "3.7"
-
 services:
   docs:
     build:
@@ -7,6 +5,15 @@ services:
       dockerfile: Dockerfile
       target: dev
     ports:
-      - 8000:8000
+      - "8000:8000"
     volumes:
       - ./:/app
+
+  app:
+    image: node:18-alpine
+    working_dir: /app
+    command: sh -lc "corepack enable && corepack prepare yarn@1.22.22 --activate && yarn install && node src/index.js"
+    ports:
+      - "8086:3000"
+    volumes:
+      - ./app:/app
